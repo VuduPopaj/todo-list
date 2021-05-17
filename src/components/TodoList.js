@@ -15,16 +15,20 @@ function TodoList() {
   const [todoItems, setTodoItems] = useState(array);
 
   const addListItem = () => {
-    setTodoItems([...todoItems, todoInput.current.value]);
+    if (!todoInput.current.value) {
+      alert("Empty field! Please enter what you'd like to do today :)");
+    } else {
+      setTodoItems([...todoItems, todoInput.current.value]);
 
-    localStorage.setItem(
-      "todoList",
-      JSON.stringify([
-        ...JSON.parse(localStorage.getItem("todoList")),
-        todoInput.current.value,
-      ])
-    );
-    todoInput.current.value = "";
+      localStorage.setItem(
+        "todoList",
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("todoList")),
+          todoInput.current.value,
+        ])
+      );
+      todoInput.current.value = "";
+    }
   };
 
   const removeListItem = (item) => {
@@ -47,6 +51,7 @@ function TodoList() {
           name="name"
           placeholder="Enter task"
           ref={todoInput}
+          required
         />
         <button type="button" onClick={addListItem}>
           Add
