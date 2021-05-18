@@ -74,4 +74,5 @@ code {
 
 .todo-items {
   border: 1px solid gray;
+  opacity: 2;
 }

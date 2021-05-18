@@ -5,12 +5,12 @@
 const TodoItems = ({ todoItems, removeListItem }) => {
   return (
     <div className="todo-items">
-      {todoItems.map((item,index) => {
+      {todoItems.map((item, index) => {
         return (
           <div
             className="todo-item"
             key={index}
-            onClick={() => removeListItem(item)}
+            onClick={() => removeListItem(index)}
           >
             {item}
           </div>

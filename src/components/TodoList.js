@@ -3,7 +3,6 @@
 // Contains function for removing tasks.
 import React, { useState } from "react";
 import TodoItems from "./TodoItem";
-
 function TodoList() {
   let todoInput = React.createRef();
   let array = [];
@@ -13,13 +12,12 @@ function TodoList() {
     localStorage.setItem("todoList", JSON.stringify([]));
   }
   const [todoItems, setTodoItems] = useState(array);
-
+  const [required, setRequired] = useState(false);
   const addListItem = () => {
     if (!todoInput.current.value) {
-      alert("Empty field! Please enter what you'd like to do today :)");
+      setRequired(true);
     } else {
       setTodoItems([...todoItems, todoInput.current.value]);
-
       localStorage.setItem(
         "todoList",
         JSON.stringify([
@@ -27,22 +25,19 @@ function TodoList() {
           todoInput.current.value,
         ])
       );
+      setRequired(false);
       todoInput.current.value = "";
     }
   };
-
   const removeListItem = (item) => {
     let filteredList = JSON.parse(localStorage.getItem("todoList")).filter(
       function (value, index, arr) {
-        return value !== item;
+        return index !== item;
       }
     );
-
     setTodoItems([...filteredList]);
-
     localStorage.setItem("todoList", JSON.stringify(filteredList));
   };
-
   return (
     <div className="container">
       <form className="input-form">
@@ -51,9 +46,9 @@ function TodoList() {
           name="name"
           placeholder="Enter task"
           ref={todoInput}
-          required
+          required={required}
         />
-        <button type="button" onClick={addListItem}>
+        <button type="submit" onClick={addListItem}>
           Add
         </button>
       </form>
@@ -61,5 +56,4 @@ function TodoList() {
     </div>
   );
 }
-
 export default TodoList;
