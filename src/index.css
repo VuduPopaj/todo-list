@@ -66,6 +66,7 @@ code {
   padding: 15px;
   box-sizing: border-box;
   border-radius: 5px;
+  border: 1px solid gray;
 }
 
 .container .todo-item div:first-child {
@@ -73,6 +74,5 @@ code {
 }
 
 .todo-items {
-  border: 1px solid gray;
   opacity: 2;
 }
